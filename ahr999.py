@@ -63,12 +63,8 @@ if __name__ == '__main__':
         elif get_indicator()<=0.45:
             title = 'Time to all in ETH!!!!!!!!'
         time.sleep(seconds)
-        count_hours+=6
+        count_hours+=4
 #if __name__ == '__main__':
 #    title= ' ahr999 test'
 #    body = 'current ahr999 is '+str(get_indicator())
 #    send_email(body,title)
-
-                                                             57,1          76%
-
-                                                              28,1          43%
