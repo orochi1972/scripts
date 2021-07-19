@@ -52,7 +52,7 @@ def sleeptime(hour,mins,sec):
     return hour*3600 + mins*60 + sec;
 
 if __name__ == '__main__':
-    seconds = sleeptime(6,0,0);
+    seconds = sleeptime(4,0,0);
     count_hours= 0
     while True:
         if count_hours >= 12*2*7:
