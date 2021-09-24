@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 # email notification 
-# case 1 :  ahr999 <0.45, send email daily
+# case 1 :  ahr999 <=0.45, send email daily
 # case 2 : ahr999 indicator weekly
 # usage: all in ETH when case 1
 # 17 Jul 2021, HangZhou
@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
+from datetime import date,datetime
 from pyvirtualdisplay import Display
 sender = 'Orochi1972@126.com'
 receivers = ['orochi1972@163.com']
@@ -48,23 +49,16 @@ def get_indicator():
     except Exception as e:
         send_email('e','it seems somthing wrong with the ahr999.com')
     return number
-def sleeptime(hour,mins,sec):
-    return hour*3600 + mins*60 + sec;
 
 if __name__ == '__main__':
-    seconds = sleeptime(4,0,0);
-    count_hours= 0
-    while True:
-        if count_hours >= 12*2*7:
-            title= 'weekly ahr999 indicator notification'
-            body = 'current ahr999 is '+str(get_indicator())
-            send_email(body,title)
-            count_hours=0
-        elif get_indicator()<=0.45:
-            title = 'Time to all in ETH!!!!!!!!'
-        time.sleep(seconds)
-        count_hours+=4
-#if __name__ == '__main__':
-#    title= ' ahr999 test'
-#    body = 'current ahr999 is '+str(get_indicator())
-#    send_email(body,title)
+    weekday = datetime.now().isoweekday()
+    ind = get_indicator()
+    if weekday ==7 and ind>0.45:
+        title= 'weekly ahr999 indicator notification'
+        body = 'current ahr999 is '+str(get_indicator())
+        send_email(body,title)
+    if ind<=0.45:
+        title = 'Time to buy the dip of the year'
+        body = 'current ahr999 is '+str(get_indicator())
+        send_email(body,title)
+
